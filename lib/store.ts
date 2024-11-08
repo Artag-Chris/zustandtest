@@ -9,6 +9,19 @@ export type Task={
     status: Status
 }
 
-export const useTaskStore = create(()=>({
+export type State ={
+    task: Task[]
+}
 
+export type Actions={
+    addTask:(title:string,description?:string)=> void
+    removeTask:(id:string)=>void
+    updateTask:(id:string, status:Status)=>void
+}
+
+export const useTaskStore = create<State & Actions>()((set)=>({
+    task:[],
+    addTask:()=>{},
+    removeTask:()=>{},
+    updateTask:()=>{}
 }))
