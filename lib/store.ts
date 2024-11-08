@@ -5,7 +5,7 @@ export type Status = `TODO`| `IN_PROGRESS`| `Done`
 export type Task={
     id: string,
     title: string,
-    description: string,
+    description?: string,
     status: Status
 }
 
@@ -21,7 +21,9 @@ export type Actions={
 
 export const useTaskStore = create<State & Actions>()((set)=>({
     task:[],
-    addTask:()=>{},
+    addTask:(title:string, description?:string)=>set(state=>({
+        task:[...state.task,{id:`123`,title, description,status:`TODO`}]
+    })),
     removeTask:()=>{},
     updateTask:()=>{}
 }))
