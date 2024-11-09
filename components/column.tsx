@@ -1,22 +1,20 @@
-import Task from './task'
+'use client'
 
-const tasks = [
-  {
-    id: '1234',
-    title: 'Our first task',
-    description: 'Some description',
-    status: 'TODO'
-  }
-]
+import { useTaskStore } from '@/lib/store'
+import Task from './task'
+import { useMemo } from 'react'
 
 export default function Column({
   title,
-  status
+  status,
 }: {
   title: string
   status: string
 }) {
-  const filteredTasks = tasks.filter(task => task.status === status)
+
+  const tasks= useTaskStore(state=>state.task)
+  const filteredTasks = useMemo(
+     ()=> tasks.filter(task=> task.status===status),[tasks,status] )
 
   return (
     <section className='h-[600px] flex-1'>
