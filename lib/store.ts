@@ -41,6 +41,6 @@ export const useTaskStore = create<State & Actions>()(
         task:state.task.map(task =>task.id==id? {...task,status}:task)
     }))
 }),
-{name:`task-store`}
+{name:`task-store`,skipHydration:true}
     )
 )

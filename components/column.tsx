@@ -2,7 +2,7 @@
 
 import { Status, useTaskStore } from '@/lib/store'
 import Task from './task'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 export default function Column({
   title,
@@ -16,6 +16,12 @@ export default function Column({
     () => tasks.filter(task => task.status === status),
     [tasks, status]
   )
+ //con next.js y zustand se necesita hidratar la data
+ //es como decir unir el local storage del browser con el estado global
+ //
+  useEffect(() => {
+    useTaskStore.persist.rehydrate()
+  }, [])
 
   const updateTask = useTaskStore(state => state.updateTask)
   const dragTask = useTaskStore(state => state.dragTask)
